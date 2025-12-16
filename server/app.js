@@ -2,19 +2,17 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import connectToDb from './config/db.js';
-import {config} from 'dotenv';
+import { config } from 'dotenv';
 config();
 import userRoutes from './routes/user.routes.js'
 import courseRoutes from './routes/course.routes.js'
-import contactRoutes from './routes/contact.routes.js'
-import paymentRoutes from './routes/payment.routes.js'
 import errorMiddleware from './middlewares/error.middlewares.js'
 import morgan from 'morgan';
 
 const app = express();
 app.use(cors({
-   origin: ['http://localhost:5173', 'https://lms-project-roan-ten.vercel.app'],
-   credentials:true
+  origin: ['http://localhost:5173', 'https://lms-project-roan-ten.vercel.app'],
+  credentials: true
 }));
 
 app.use(morgan('dev'));
@@ -30,11 +28,9 @@ app.use('/ping', (req, res) => {
 app.use('/api/v1/courses', courseRoutes);
 // 3 route config
 app.use('/api/v1/user', userRoutes);
-app.use('/api/v1', contactRoutes);
-app.use('/api/v1/payments',paymentRoutes);
 
 
-app.all('*',(req, res)=>{
+app.all('*', (req, res) => {
   res.status(404).send('OOPS!! 404 page not found');
 })
 

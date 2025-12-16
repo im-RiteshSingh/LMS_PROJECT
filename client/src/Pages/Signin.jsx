@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { isEmail } from "../helpers/regexMatcher.jsx";
 import HomeLayout from "../Layouts/HomeLayout.jsx";
-import  {login}  from "../redux/slices/authSlice.js";
+import { login } from "../redux/slices/authSlice.js";
 
 function Signin() {
 
@@ -19,7 +19,7 @@ function Signin() {
 
 
     function handleUserInput(e) {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         setSigninDetails({
             ...signinDetails,
             [name]: value
@@ -30,18 +30,18 @@ function Signin() {
     async function onFormSubmit(e) {
         e.preventDefault();
         console.log(signinDetails);
-        if(!signinDetails.email || !signinDetails.password ) {
+        if (!signinDetails.email || !signinDetails.password) {
             toast.error("Please fill all the details");
             return;
         }
-        if(!isEmail(signinDetails.email)) {
+        if (!isEmail(signinDetails.email)) {
             toast.error("Invalid email provided");
             return;
         }
         console.log(signinDetails);
 
         const response = await dispatch(login(signinDetails));
-        if(response?.payload?.data?.success) {
+        if (response?.payload?.data?.success) {
             navigate("/");
         }
         setSigninDetails({
@@ -55,14 +55,14 @@ function Signin() {
             <div className="flex overflow-x-auto items-center justify-center h-[100vh]">
                 <form onSubmit={onFormSubmit} noValidate className="flex flex-col justify-center gap-3 rounded-lg p-4 text-white w-35">
                     <h1 className="text-2xl text-center font-bold">Login Page</h1>
-                   
+
                     <div className="flex flex-col gap-1">
                         <label htmlFor="email" className="font-semibold">Email</label>
-                        <input 
+                        <input
                             onChange={handleUserInput}
                             value={signinDetails.email}
                             required
-                            type="text" 
+                            type="text"
                             name="email"
                             className="bg-transparent px-2 py-1 border"
                             placeholder="enter your Email..."
@@ -70,11 +70,11 @@ function Signin() {
                     </div>
                     <div className="flex flex-col gap-1">
                         <label htmlFor="password" className="font-semibold">Password</label>
-                        <input 
+                        <input
                             required
                             onChange={handleUserInput}
                             value={signinDetails.password}
-                            type="password" 
+                            type="password"
                             name="password"
                             className="bg-transparent px-2 py-1 border"
                             placeholder="enter your Password..."
@@ -84,7 +84,7 @@ function Signin() {
                         Sign In
                     </button>
                     <p className="text-center">
-                            Don&apos;t have an account ? <Link to="/signup" className="cusror-pointer text-accent">Register</Link>
+                        Don&apos;t have an account ? <Link to="/signup" className="cusror-pointer text-accent">Register</Link>
                     </p>
                 </form>
             </div>

@@ -41,10 +41,7 @@ const userSchema = new Schema(
         type: String,
       },
     },
-    subscription: {
-      id: String,
-      status: String,
-    },
+
 
   },
   { timestamps: true }

@@ -23,7 +23,7 @@ function Signup() {
     const [previewImage, setPreviewImage] = useState("");
 
     function handleUserInput(e) {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         setSignupDetails({
             ...signupDetails,
             [name]: value
@@ -34,7 +34,7 @@ function Signup() {
     function handleImage(e) {
         e.preventDefault();
         const uploadedImage = e.target.files[0];
-        if(!uploadedImage) return;
+        if (!uploadedImage) return;
         setSignupDetails({
             ...signupDetails,
             avatar: uploadedImage
@@ -49,19 +49,19 @@ function Signup() {
     async function onFormSubmit(e) {
         e.preventDefault();
         console.log(signupDetails);
-        if(!signupDetails.email || !signupDetails.password || !signupDetails.fullName ) {
+        if (!signupDetails.email || !signupDetails.password || !signupDetails.fullName) {
             toast.error("Please fill all the details");
             return;
         }
-        if(signupDetails.fullName.length < 5) {
+        if (signupDetails.fullName.length < 5) {
             toast.error("Name should be atleast of 5 characters");
             return;
         }
-        if(!isEmail(signupDetails.email)) {
+        if (!isEmail(signupDetails.email)) {
             toast.error("Invalid email provided");
             return;
         }
-        if(!isValidPassword(signupDetails.password)) {
+        if (!isValidPassword(signupDetails.password)) {
             toast.error("Invalid password provided, password should 6-16 character long with atleast a number and a special character");
             return;
         }
@@ -74,7 +74,7 @@ function Signup() {
 
 
         const response = await dispatch(createAccount(formData));
-        if(response?.payload?.data) {
+        if (response?.payload?.data) {
             navigate("/");
         }
         setSignupDetails({
@@ -92,8 +92,8 @@ function Signup() {
                 <form onSubmit={onFormSubmit} noValidate className="flex flex-col justify-center gap-3 rounded-lg p-4 text-white w-35">
                     <h1 className="text-2xl text-center font-bold">Registration Page</h1>
                     <label htmlFor="image_uploads" className="cursor-pointer">
-                        { previewImage ? (
-                            <img className="w-24 h-24 rounded-full m-auto" src={previewImage}/>
+                        {previewImage ? (
+                            <img className="w-24 h-24 rounded-full m-auto" src={previewImage} />
                         ) : (
                             <BsPersonCircle className="w-24 h-24 rounded-full m-auto" />
                         )}
@@ -101,7 +101,7 @@ function Signup() {
                     {/* Here, id of input and htmlfor of label is same, so that input can be accessed by clicking on the label.  */}
                     <input
                         onChange={handleImage}
-                        type="file" 
+                        type="file"
                         className="hidden"
                         name="image_uploads"
                         id="image_uploads"
@@ -109,11 +109,11 @@ function Signup() {
                     />
                     <div className="flex flex-col gap-1">
                         <label htmlFor="fullName" className="font-semibold">Name</label>
-                        <input 
+                        <input
                             onChange={handleUserInput}
                             value={signupDetails.fullName}
                             required
-                            type="text" 
+                            type="text"
                             name="fullName"
                             className="bg-transparent px-2 py-1 border"
                             placeholder="enter your username..."
@@ -121,11 +121,11 @@ function Signup() {
                     </div>
                     <div className="flex flex-col gap-1">
                         <label htmlFor="email" className="font-semibold">Email</label>
-                        <input 
+                        <input
                             onChange={handleUserInput}
                             value={signupDetails.email}
                             required
-                            type="text" 
+                            type="text"
                             name="email"
                             className="bg-transparent px-2 py-1 border"
                             placeholder="enter your Email..."
@@ -133,11 +133,11 @@ function Signup() {
                     </div>
                     <div className="flex flex-col gap-1">
                         <label htmlFor="password" className="font-semibold">Password</label>
-                        <input 
+                        <input
                             required
                             onChange={handleUserInput}
                             value={signupDetails.password}
-                            type="password" 
+                            type="password"
                             name="password"
                             className="bg-transparent px-2 py-1 border"
                             placeholder="enter your Password..."
@@ -147,7 +147,7 @@ function Signup() {
                         Create account
                     </button>
                     <p className="text-center">
-                            Already have an account ? <Link to="/login" className="cusror-pointer text-accent">Login</Link>
+                        Already have an account ? <Link to="/login" className="cusror-pointer text-accent">Login</Link>
                     </p>
                 </form>
             </div>

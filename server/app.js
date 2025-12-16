@@ -11,9 +11,10 @@ import morgan from 'morgan';
 
 const app = express();
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://lms-project-roan-ten.vercel.app'],
+  origin: true,
   credentials: true
 }));
+console.log('CORS configured with origin: true');
 
 app.use(morgan('dev'));
 
